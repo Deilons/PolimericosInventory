@@ -35,6 +35,14 @@ namespace PolimericosInventoryAPI.Models
         public decimal UnitPrice { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
         public DateTime? UpdatedAt { get; set; }
+
+        // Foreign Key hacia Category
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+
+        // Relación 1:N con InventoryMovement
+        public ICollection<InventoryMovement> InventoryMovements { get; set; }
     }
 }
