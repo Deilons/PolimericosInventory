@@ -38,11 +38,11 @@ namespace PolimericosInventoryAPI.Models
 
         public DateTime? UpdatedAt { get; set; }
 
-        // Foreign Key hacia Category
+        // foreign key for Category
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 
-        // Relación 1:N con InventoryMovement
+        // relationship with InventoryMovement
         public ICollection<InventoryMovement> InventoryMovements { get; set; }
     }
 }
