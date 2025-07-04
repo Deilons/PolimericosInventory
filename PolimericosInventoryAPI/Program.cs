@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PolimericosInventoryAPI.Data;
 using PolimericosInventoryAPI.Interfaces;
 using PolimericosInventoryAPI.Services;
+
 using System;
 
 DotEnv.Load(); // hange this line if you want to load a different .env file
@@ -23,6 +24,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 // Register services
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
