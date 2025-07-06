@@ -31,7 +31,8 @@ namespace PolimericosInventoryAPI.Services
                 MinimumStock = dto.MinimumStock,
                 UnitPrice = dto.UnitPrice,
                 CategoryId = dto.CategoryId,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                Note = dto.Note
             };
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
@@ -67,7 +68,8 @@ namespace PolimericosInventoryAPI.Services
                 MinimumStock = p.MinimumStock,
                 UnitPrice = p.UnitPrice,
                 CreatedAt = p.CreatedAt,
-                CategoryName = p.Category?.Name
+                CategoryName = p.Category?.Name,
+                Note = p.Note
             });
         }
 
@@ -90,7 +92,8 @@ namespace PolimericosInventoryAPI.Services
                 MinimumStock = product.MinimumStock,
                 UnitPrice = product.UnitPrice,
                 CreatedAt = product.CreatedAt,
-                CategoryName = product.Category?.Name
+                CategoryName = product.Category?.Name,
+                Note = product.Note
             };
         }
 
@@ -111,6 +114,7 @@ namespace PolimericosInventoryAPI.Services
             product.UnitPrice = dto.UnitPrice;
             product.CategoryId = dto.CategoryId;
             product.UpdatedAt = DateTime.UtcNow;
+            product.Note = dto.Note;
 
             await _context.SaveChangesAsync();
             return true;

@@ -23,5 +23,8 @@ namespace PolimericosInventoryAPI.DTOs
         public decimal UnitPrice { get; set; }
 
         public int? CategoryId { get; set; }
+
+        [MaxLength(200)]
+        public string? Note { get; set; }
     }
 }

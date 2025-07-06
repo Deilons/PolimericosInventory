@@ -33,10 +33,9 @@ namespace PolimericosInventoryAPI.Models
 
         [Column(TypeName = "decimal(10, 2)")]
         public decimal UnitPrice { get; set; }
-
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
         public DateTime? UpdatedAt { get; set; }
+        public string? Note { get; set; }
 
         // foreign key for Category
         public int? CategoryId { get; set; }
