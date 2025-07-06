@@ -73,6 +73,33 @@ namespace PolimericosInventoryAPI.Services
             });
         }
 
+        // Retrieves products by category name
+        public async Task<IEnumerable<ProductDTO>> GetByCategoryAsync(string categoryName)
+        {
+            if (!await _context.Categories.AnyAsync(c => c.Name.ToLower() == categoryName.ToLower()))
+                return new List<ProductDTO>();
+
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.Category.Name.ToLower() == categoryName.ToLower())
+                .ToListAsync();
+
+            return products.Select(p => new ProductDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                ProductType = p.ProductType.ToString(),
+                Unit = p.Unit,
+                QuantityInStock = p.QuantityInStock,
+                MinimumStock = p.MinimumStock,
+                UnitPrice = p.UnitPrice,
+                CreatedAt = p.CreatedAt,
+                CategoryName = p.Category?.Name,
+                Note = p.Note
+            });
+        }
+
+
         // Retrieves a product by its ID and includes the category information
         public async Task<ProductDTO?> GetByIdAsync(int id)
         {

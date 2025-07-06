@@ -9,5 +9,7 @@ namespace PolimericosInventoryAPI.Interfaces
         Task<ProductDTO> CreateAsync(ProductCreateDTO dto);
         Task<bool> UpdateAsync(int id, ProductCreateDTO dto);
         Task<bool> DeleteAsync(int id);
+        Task<IEnumerable<ProductDTO>> GetByCategoryAsync(string categoryName);
+
     }
 }

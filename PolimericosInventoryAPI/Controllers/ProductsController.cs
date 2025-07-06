@@ -31,6 +31,14 @@ namespace PolimericosInventoryAPI.Controllers
             return Ok(product);
         }
 
+        // GET: api/products/category/{categoryName}
+        [HttpGet("category/{categoryName}")]
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetByCategory(string categoryName)
+        {
+            var products = await _productService.GetByCategoryAsync(categoryName);
+            return Ok(products);
+        }
+
         // POST: api/products
         [HttpPost]
         public async Task<ActionResult<ProductDTO>> Create([FromBody] ProductCreateDTO dto)
