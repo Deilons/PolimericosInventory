@@ -45,8 +45,8 @@ if (app.Environment.IsDevelopment())
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    await DataSeeder.ResetAndSeedAsync(context); // Reset the database and seed it with initial data
-    //  await DataSeeder.SeedAsync(context); // Seed the database with initial data
+    // await DataSeeder.ResetAndSeedAsync(context); // Reset the database and seed it with initial data
+    await DataSeeder.SeedAsync(context); // Seed the database with initial data
 
 }
 
