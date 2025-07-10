@@ -1,24 +1,34 @@
-# This Dockerfile is used to build and run the PolimericosInventoryAPI application.
+# Imagen base para producción
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 80
 
-# this stage is used to build the application
+# Imagen SDK para construir el proyecto
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+
+# Copiar el archivo .csproj
 COPY ["PolimericosInventoryAPI.csproj", "./"]
-RUN dotnet restore "PolimericosInventoryAPI/PolimericosInventoryAPI.csproj"
+
+# Restaurar dependencias (ruta corregida aquí)
+RUN dotnet restore "PolimericosInventoryAPI.csproj"
+
+# Copiar todo el código fuente
 COPY . .
-WORKDIR "/src/PolimericosInventoryAPI"
+
+# Establecer el directorio donde se compila
+WORKDIR "/src"
+
+# Compilar el proyecto
 RUN dotnet build "PolimericosInventoryAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-# this stage is used to publish the application
+# Publicar
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "PolimericosInventoryAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# this stage is used to copy the build output to the base image
+# Imagen final para producción
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
