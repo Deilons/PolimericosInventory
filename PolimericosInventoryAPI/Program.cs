@@ -66,6 +66,8 @@ using (var scope = app.Services.CreateScope())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowAll"); // Apply CORS policy
+
 app.UseAuthorization();
 
 app.MapControllers();
